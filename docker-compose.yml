@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  tidb-server-container:
+    image: pingcap/tidb:latest
+    container_name: tidb-server-container
+  cqrs-example-docker-compose-tidb-app:
+    image: cqrs-example-docker-compose-tidb-image
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - tidb-server-container
+    ports:
+      - 8083:8080
+    volumes:
+      - /data/cqrs-example-docker-compose-tidb-app
